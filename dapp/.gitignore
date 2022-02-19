@@ -1,5 +1,8 @@
 node_modules
 *.log
 
+# Build folders
+build
+
 #public/zkLibs/buffi_inputs.json
 !public/zkLibs/*
