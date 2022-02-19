@@ -1,8 +1,31 @@
-# zkProof Of Buffiness
+# zkProof Of Buffiness - ETH Denver 2021
 
-Simple implementation of zkProofs that let you proof that you belong to the select group of Bufficorns owners without revealing witch Buffi is yours or what is your address.
+https://zkbuffi.web.app/
 
-Implemented using SnarkJs and Circom circuit compiler. 
+Proof that you belong to the select group of Bufficorns owners without revealing witch Buffi is yours nor which is your address.
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/45073251/154821162-3d4af844-1f74-4fdb-91c3-52e280e55c10.png"/>
+</p>
+
+### Mobile first
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/45073251/154821939-e0df5284-d4d1-4b50-8e1e-8b1b06b34855.png"/>
+</p>
+
+## Authors
+
+👤 **Agustin Zavalla** - https://github.com/martinlsanchez
+
+👤 **Emilio Garcia** - https://github.com/danielemiliogarcia
+
+👤 **Jose Baredes** - https://github.com/azavalla
+
+👤 **Martin Sanchez** - https://github.com/josebaredes
+
+
+## Implemented using SnarkJs and Circom circuit compiler.
 
 SNARKJS > https://github.com/iden3/snarkjs
 
@@ -15,15 +38,27 @@ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 git clone https://github.com/iden3/circom.git
 cd circom
 cargo build  --release
-corgo install --path circom
+cargo install --path circom
+
+# snarkjs
+npm install -g snarkjs
+
+
 ```
 
 ### Development Scripts
 ```
- sh run_all.sh 
+ sh run_all.sh
  sh collect_static.sh
 ```
 
-###Inspired by some awesome ETH DENVER folks:
+### Start Dapp locally
+```
+cd dapp
+npm i
+npm run start
+```
+
+### Inspired by some awesome ETH DENVER folks:
 * https://www.twitch.tv/videos/1300382536
 * And many more...
