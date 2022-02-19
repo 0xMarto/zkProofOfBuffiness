@@ -1,0 +1,18 @@
+powersOfTau*
+
+# Generated files and folders
+buffi_cpp
+buffi_js
+buffi.r1cs
+buffi.sym
+buffi.zkey
+buffi_outputs.json
+buffi_proof.json
+buffi_verification_key.json
+buffi_verifier.sol
+buffi_witness.wtns
+buffi_witness.json
+
+# Ignore IDE files
+.idea
+.vscode
