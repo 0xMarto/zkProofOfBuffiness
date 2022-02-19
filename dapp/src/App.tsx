@@ -102,7 +102,7 @@ class App extends React.Component<MyProps, MyState> {
                           Sign a message plz
                         </Button>
                         <Box marginTop={'20px'}>
-                          Signed: {this.state.signed}
+                          Signed: {this.state.signed ? this.state.signed.substring(1, 10) : null}
                         </Box>
 
                         {
@@ -316,6 +316,19 @@ class App extends React.Component<MyProps, MyState> {
       console.error(err);
       // signTypedDataV4VerifyResult.innerHTML = `Error: ${err.message}`;
     }
+
+    fetch("https://api.tinyurl.com/create", {
+      body: JSON.stringify({url: "https://www.example.com/my-really-long-link-that-I-need-to-shorten/84378949", domain: "tiny.one"}),
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer hy7heS5lDT28kQOCLhO9vmcSqZhrVNF7k1GgjA0p0RPI4Zq7ixEduEJEBhQ3",
+        "Content-Type": "application/json"
+      },
+      method: "POST"
+    })
+    .then(response => response.json())
+    .then(data => console.log('data', data.data.tiny_url))
+    .catch(error => console.log('error', error))
   }
 }
 
@@ -343,7 +356,7 @@ function Header() {
       // margin='10px'
       // paddingTop='10px'
     >
-      PoB
+      zkPoB
     </Heading>
   </Box>
   <Spacer />
