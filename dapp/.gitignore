@@ -1,2 +1,5 @@
 node_modules
 *.log
+
+#public/zkLibs/buffi_inputs.json
+!public/zkLibs/*
