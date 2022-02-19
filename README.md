@@ -2,7 +2,14 @@
 
 https://zkbuffi.web.app/
 
-Proof that you belong to the select group of Bufficorns owners without revealing witch Buffi is yours nor which is your address.
+
+## Vision
+
+Hi anon, join us at ZKPoB and prove that you are a Bufficorn without revealing anything about yourself other than your Buffiness
+## Description
+
+zkPoB is a mobile compatible tool that lets anyone prove they own a Bufficorn (or any NFT) without revealing which Buffi they own or the address they are verifying themselves with
+
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/45073251/154821162-3d4af844-1f74-4fdb-91c3-52e280e55c10.png"/>
