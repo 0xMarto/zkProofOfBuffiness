@@ -1,7 +1,10 @@
 # zkProof Of Buffiness - ETH Denver 2021
 
-https://zkbuffi.web.app/
+Live demo --> https://zkbuffi.web.app/
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/45073251/154821162-3d4af844-1f74-4fdb-91c3-52e280e55c10.png"/>
+</p>
 
 ## Vision
 
@@ -10,12 +13,7 @@ Hi anon, join us at ZKPoB and prove that you are a Bufficorn without revealing a
 
 zkPoB is a mobile compatible tool that lets anyone prove they own a Bufficorn (or any NFT) without revealing which Buffi they own or the address they are verifying themselves with
 
-
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/45073251/154821162-3d4af844-1f74-4fdb-91c3-52e280e55c10.png"/>
-</p>
-
-### Mobile first
+## Mobile first
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/45073251/154821939-e0df5284-d4d1-4b50-8e1e-8b1b06b34855.png"/>
