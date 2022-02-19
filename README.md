@@ -8,6 +8,16 @@ SNARKJS > https://github.com/iden3/snarkjs
 
 CIRCOM LIB > https://github.com/iden3/circomlib
 
+### Requirements
+```
+# RUST (how to install rust)
+curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+git clone https://github.com/iden3/circom.git
+cd circom
+cargo build  --release
+corgo install --path circom
+```
+
 ### Development Scripts
 ```
  sh run_all.sh 
