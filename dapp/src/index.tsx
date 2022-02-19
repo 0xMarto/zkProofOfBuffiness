@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import './buffi.css'
 import App from "./App";
 import { DAppProvider } from "@usedapp/core";
 

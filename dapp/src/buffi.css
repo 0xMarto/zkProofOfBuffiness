@@ -1,0 +1,10 @@
+#proof-container {
+    text-align: center;
+    padding: 0 10px;
+}
+
+
+#proof-container canvas {
+    height: 160px;
+    width: 160px;
+}

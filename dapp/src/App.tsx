@@ -108,14 +108,14 @@ class App extends React.Component<MyProps, MyState> {
                                         :
                                         this.state.role === 'owner'
                                             ?
-                                            <Container>
+                                            <Container id="verify-container">
                                                 <Button
                                                     bg={'black'}
                                                     rounded={'full'}
                                                     color={'white'}
                                                     onClick={() => this._signMessage()}
                                                     _hover={{bg: 'black'}}>
-                                                    Sign a message plz
+                                                    Verify your address
                                                 </Button>
                                                 <Box marginTop={'20px'}>
                                                     Signed: {this.state.signed ? this.state.signed.substring(1, 10) : null}
@@ -124,14 +124,14 @@ class App extends React.Component<MyProps, MyState> {
                                                 {
                                                     this.state.signed
                                                         ?
-                                                        <Container>
+                                                        <Container id="proof-container">
                                                             <Button
                                                                 bg={'black'}
                                                                 rounded={'full'}
                                                                 color={'white'}
                                                                 onClick={() => this._verifyMessage()}
                                                                 _hover={{bg: 'black'}}>
-                                                                Verify msg
+                                                                Generate zk Proof
                                                             </Button>
                                                             <QRCode value="https://vitalik.ca/"/>
                                                         </Container>
