@@ -461,6 +461,8 @@ function Header() {
 const TestQR = (props: any) => {
   const [data, setData] = useState('No result');
 
+  console.log('data', data)
+
   return (
     <>
       <QrReader
@@ -475,7 +477,7 @@ const TestQR = (props: any) => {
         }}
         // style={{ width: '100%' }}
         // constraints={{ width: '100%' as ConstrainULong }}
-        constraints={{ facingMode: 'user' }}
+        constraints={{}}
       />
       <p>{data}</p>
     </>
