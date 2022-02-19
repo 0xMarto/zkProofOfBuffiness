@@ -14,7 +14,18 @@ Proof that you belong to the select group of Bufficorns owners without revealing
   <img src="https://user-images.githubusercontent.com/45073251/154821939-e0df5284-d4d1-4b50-8e1e-8b1b06b34855.png"/>
 </p>
 
-### Implemented using SnarkJs and Circom circuit compiler.
+## Authors
+
+👤 **Agustin Zavalla** - https://github.com/martinlsanchez
+
+👤 **Emilio Garcia** - https://github.com/danielemiliogarcia
+
+👤 **Jose Baredes** - https://github.com/azavalla
+
+👤 **Martin Sanchez** - https://github.com/josebaredes
+
+
+## Implemented using SnarkJs and Circom circuit compiler.
 
 SNARKJS > https://github.com/iden3/snarkjs
 
