@@ -10,4 +10,3 @@ set -eux
 
 # [optional] Generate (ready to deploy) verification solidity contract code
 snarkjs zkey export solidityverifier buffi.zkey buffi_verifier.sol
-

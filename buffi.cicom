@@ -1,9 +1,25 @@
-template Multiplier() {
+
+template IsZero() {
+    signal input in;
+    signal output out;
+
+    signal inv;
+
+    inv <-- in!=0 ? 1/in : 0;
+
+    out <== -in*inv +1;
+    in*out === 0;
+}
+
+template BuffiCircuit() {
     signal input a;
     signal output b;
 
-    a === 1;
-    b <== a;
+    component isz1 = IsZero();
+    component isz2 = IsZero();
+    a ==> isz1.in;
+    isz1.out ==> isz2.in;
+    isz2.out ==> b;
 }
 
-component main = Multiplier();
+component main = BuffiCircuit();

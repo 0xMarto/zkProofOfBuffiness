@@ -12,6 +12,7 @@ buffi_verification_key.json
 buffi_verifier.sol
 buffi_witness.wtns
 buffi_witness.json
+buffi_proof.calldata
 
 # Ignore IDE files
 .idea
