@@ -11,6 +11,7 @@
     "@fontsource/inter": "^4.5.0",
     "@metamask/detect-provider": "^1.2.0",
     "@metamask/jazzicon": "^2.0.0",
+    "@stdlib/bigint": "^0.0.11",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -52,13 +53,17 @@
   "browserslist": {
     "production": [
       ">0.2%",
+      "not ie <= 99",
+      "not android <= 4.4.4",
       "not dead",
       "not op_mini all"
     ],
     "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+      ">0.2%",
+      "not ie <= 99",
+      "not android <= 4.4.4",
+      "not dead",
+      "not op_mini all"
     ]
   }
 }

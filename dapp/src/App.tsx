@@ -392,14 +392,13 @@ class App extends React.Component<MyProps, MyState> {
       // const buffiInputs = { 'a': BigInt(recoveredAddr) }
       // const buffiInputs = { 'a': BigNumber.from(recoveredAddr) }
 
-
       // Generate zk proof
       // const buffiInputs = {'a': 1};
       // const circuit = process.env.PUBLIC_URL + '/public/zkLibs/buffi_js/buffi.wasm'
-      const circuit = process.env.PUBLIC_URL + 'buffi.wasm'
+      const circuit = document.location.href + 'buffi.wasm'
       console.log(circuit)
       // const circuit_key = process.env.PUBLIC_URL + '/public/zkLibs/buffi.zkey'
-      const circuit_key = process.env.PUBLIC_URL + 'buffi.zkey'
+      const circuit_key = document.location.href + 'buffi.zkey'
       console.log(circuit_key)
       // const { proof, buffi_outputs } = await snarkjs.plonk.fullProve(buffiInputs, circuit, circuit_key);
       // const res = await fetch('buffi.wasm')
@@ -410,9 +409,9 @@ class App extends React.Component<MyProps, MyState> {
       // const buffer2 = await res2.arrayBuffer()
       // console.log('buffer', buffer)
       // console.log('buffer2', buffer2)
-      console.log('I will try to make the proof')
-      console.log('inputs are', buffiInputs, circuit, circuit_key)
-      console.log('typeof inputs', typeof buffiInputs, typeof circuit, typeof circuit_key)
+      console.log('> I will try to make the proof')
+      console.log('> inputs are:', buffiInputs, circuit, circuit_key)
+      console.log('> typeof inputs:', typeof buffiInputs, typeof circuit, typeof circuit_key)
       const { proof, publicSignals } = await snarkjs.plonk.fullProve(buffiInputs, circuit, circuit_key);
       console.log('Proof:', proof);
       console.log('Str Proof:', JSON.stringify(proof));
@@ -587,7 +586,9 @@ const TestQR = (props: any) => {
       <QrReader
         onResult={(result, error) => {
           if (!!result) {
+            // @ts-ignore
             setData(result?.text);
+            // @ts-ignore
             props.handler(result?.text)
           }
 

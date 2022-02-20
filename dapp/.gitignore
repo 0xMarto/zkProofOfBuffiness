@@ -6,3 +6,5 @@ build
 
 #public/zkLibs/buffi_inputs.json
 !public/zkLibs/*
+
+package-lock.json
