@@ -8,6 +8,7 @@
 - [Proof Generator Site!](http://18.116.130.17/)
 - [Proof Verifier Site!](https://zkbuffi.web.app/)
 - [Buffi Proof Verifier Contract (POLYGON)](https://polygonscan.com/address/0xd2071645403cf00d6604337d4c17120cafe2286f)
+- [Live demo video!](https://twitter.com/oiliw3/status/1495337272459218945?t=smOEXTFGCt1NSzK13muGHQ&s=19)
 
 ## Vision
 
