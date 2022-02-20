@@ -50,25 +50,26 @@ class App extends React.Component<MyProps, MyState> {
         };
 
         this.qrHandler = this.qrHandler.bind(this)
+        if (!window.localStorage.attendees)
+          window.localStorage.setItem('attendees', '0')
     }
 
     componentDidMount(): void {
-        console.log("window.location")
-        console.log(window.location.pathname)
         if (window.location.pathname.startsWith('/verify')) {
           this.setState({ role: 'doorman'})
+          window.localStorage.setItem('attendees', (Number(window.localStorage.getItem('attendees')) + 1).toString())
         }
     }
-    async qrHandler(data: string) {
-      console.log('data', data)
-      const response = await fetch(data, {
-        mode: 'no-cors' // 'cors' by default
-      })
-      console.log('response', response)
-      // this.setState({
-      //   qrData: data
-      // })
-    }
+    // async qrHandler(data: string) {
+    //   console.log('data', data)
+    //   const response = await fetch(data, {
+    //     mode: 'no-cors' // 'cors' by default
+    //   })
+    //   console.log('response', response)
+    //   // this.setState({
+    //   //   qrData: data
+    //   // })
+    // }
 
     render() {
         console.log('role', this.state.role)
@@ -373,97 +374,97 @@ class App extends React.Component<MyProps, MyState> {
         }
     }
 
-    async _verifyMessage() {
-        const provider: any = await detectEthereumProvider();
-        let accounts
+    // async _verifyMessage() {
+    //     const provider: any = await detectEthereumProvider();
+    //     let accounts
 
-        if (provider) {
-            console.log('got provider!')
-            console.log(provider); // initialize your app
-            accounts = await provider.request({method: 'eth_requestAccounts'});
-            console.log('accounts', accounts)
-        } else {
-            console.log('Please install MetaMask!');
-            return
-        }
+    //     if (provider) {
+    //         console.log('got provider!')
+    //         console.log(provider); // initialize your app
+    //         accounts = await provider.request({method: 'eth_requestAccounts'});
+    //         console.log('accounts', accounts)
+    //     } else {
+    //         console.log('Please install MetaMask!');
+    //         return
+    //     }
 
-        const from = accounts[0]
-        const chainId = await provider.request({method: 'eth_chainId'})
-        console.log('chainId', chainId)
-        const networkId = await provider.request({method: 'net_version'})
-        console.log('networkId', networkId)
-        const msgParams: any = {
-            domain: {
-                chainId,
-                name: 'Ether Mail',
-                verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
-                version: '1',
-            },
-            message: {
-                contents: 'Hello, Bob!',
-                from: {
-                    name: 'Cow',
-                    wallets: [
-                        '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826',
-                        '0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF',
-                    ],
-                },
-                to: [
-                    {
-                        name: 'Bob',
-                        wallets: [
-                            '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
-                            '0xB0BdaBea57B0BDABeA57b0bdABEA57b0BDabEa57',
-                            '0xB0B0b0b0b0b0B000000000000000000000000000',
-                        ],
-                    },
-                ],
-            },
-            primaryType: 'Mail',
-            types: {
-                EIP712Domain: [
-                    {name: 'name', type: 'string'},
-                    {name: 'version', type: 'string'},
-                    {name: 'chainId', type: 'uint256'},
-                    {name: 'verifyingContract', type: 'address'},
-                ],
-                Group: [
-                    {name: 'name', type: 'string'},
-                    {name: 'members', type: 'Person[]'},
-                ],
-                Mail: [
-                    {name: 'from', type: 'Person'},
-                    {name: 'to', type: 'Person[]'},
-                    {name: 'contents', type: 'string'},
-                ],
-                Person: [
-                    {name: 'name', type: 'string'},
-                    {name: 'wallets', type: 'address[]'},
-                ],
-            },
-        };
-        try {
-            const from = accounts[0];
-            const signed = this.state.signed;
-            console.log('recovering', signed)
-            const recoveredAddr = recoverTypedSignatureV4({
-                data: msgParams,
-                sig: signed,
-            });
-            if (toChecksumAddress(recoveredAddr) === toChecksumAddress(from)) {
-                console.log(`Successfully verified signer as ${recoveredAddr}`);
-                // signTypedDataV4VerifyResult.innerHTML = recoveredAddr;
-            } else {
-                console.log(
-                    `Failed to verify signer when comparing ${recoveredAddr} to ${from}`,
-                );
-            }
-        } catch (err) {
-            console.error(err);
-            // signTypedDataV4VerifyResult.innerHTML = `Error: ${err.message}`;
-        }
+    //     const from = accounts[0]
+    //     const chainId = await provider.request({method: 'eth_chainId'})
+    //     console.log('chainId', chainId)
+    //     const networkId = await provider.request({method: 'net_version'})
+    //     console.log('networkId', networkId)
+    //     const msgParams: any = {
+    //         domain: {
+    //             chainId,
+    //             name: 'Ether Mail',
+    //             verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
+    //             version: '1',
+    //         },
+    //         message: {
+    //             contents: 'Hello, Bob!',
+    //             from: {
+    //                 name: 'Cow',
+    //                 wallets: [
+    //                     '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826',
+    //                     '0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF',
+    //                 ],
+    //             },
+    //             to: [
+    //                 {
+    //                     name: 'Bob',
+    //                     wallets: [
+    //                         '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
+    //                         '0xB0BdaBea57B0BDABeA57b0bdABEA57b0BDabEa57',
+    //                         '0xB0B0b0b0b0b0B000000000000000000000000000',
+    //                     ],
+    //                 },
+    //             ],
+    //         },
+    //         primaryType: 'Mail',
+    //         types: {
+    //             EIP712Domain: [
+    //                 {name: 'name', type: 'string'},
+    //                 {name: 'version', type: 'string'},
+    //                 {name: 'chainId', type: 'uint256'},
+    //                 {name: 'verifyingContract', type: 'address'},
+    //             ],
+    //             Group: [
+    //                 {name: 'name', type: 'string'},
+    //                 {name: 'members', type: 'Person[]'},
+    //             ],
+    //             Mail: [
+    //                 {name: 'from', type: 'Person'},
+    //                 {name: 'to', type: 'Person[]'},
+    //                 {name: 'contents', type: 'string'},
+    //             ],
+    //             Person: [
+    //                 {name: 'name', type: 'string'},
+    //                 {name: 'wallets', type: 'address[]'},
+    //             ],
+    //         },
+    //     };
+    //     try {
+    //         const from = accounts[0];
+    //         const signed = this.state.signed;
+    //         console.log('recovering', signed)
+    //         const recoveredAddr = recoverTypedSignatureV4({
+    //             data: msgParams,
+    //             sig: signed,
+    //         });
+    //         if (toChecksumAddress(recoveredAddr) === toChecksumAddress(from)) {
+    //             console.log(`Successfully verified signer as ${recoveredAddr}`);
+    //             // signTypedDataV4VerifyResult.innerHTML = recoveredAddr;
+    //         } else {
+    //             console.log(
+    //                 `Failed to verify signer when comparing ${recoveredAddr} to ${from}`,
+    //             );
+    //         }
+    //     } catch (err) {
+    //         console.error(err);
+    //         // signTypedDataV4VerifyResult.innerHTML = `Error: ${err.message}`;
+    //     }
 
-    }
+    // }
 }
 
 
