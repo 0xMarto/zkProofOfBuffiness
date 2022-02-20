@@ -1,11 +1,13 @@
 # zkProof Of Buffiness - ETH Denver 2021
 
-Live demo --> http://18.116.130.17/
-Live demo --> https://zkbuffi.web.app/
-
 <p align="center">
   <img src="https://user-images.githubusercontent.com/45073251/154821162-3d4af844-1f74-4fdb-91c3-52e280e55c10.png"/>
 </p>
+
+### Live & deployed contracts
+- [Proof Generator Site!](http://18.116.130.17/)
+- [Proof Verifier Site!](https://zkbuffi.web.app/)
+- [Buffi Proof Verifier Contract (POLYGON)](https://polygonscan.com/address/0xd2071645403cf00d6604337d4c17120cafe2286f)
 
 ## Vision
 
