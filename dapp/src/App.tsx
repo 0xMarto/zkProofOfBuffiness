@@ -344,6 +344,9 @@ class App extends React.Component<MyProps, MyState> {
       const buffer2 = await res2.arrayBuffer()
       console.log('buffer', buffer)
       console.log('buffer2', buffer2)
+      console.log('I will try to make the proof')
+      console.log('inputs are', buffiInputs, circuit, circuit_key)
+      console.log('typeof inputs', typeof buffiInputs, typeof circuit, typeof circuit_key)
       const { proof, publicSignals } = await snarkjs.plonk.fullProve(buffiInputs, circuit, circuit_key);
       console.log('Proof:', proof);
       console.log('Str Proof:', JSON.stringify(proof));
@@ -377,8 +380,6 @@ class App extends React.Component<MyProps, MyState> {
       console.log('jsonResponse', jsonResponse)
 
       this.setState({ proofUrl: jsonResponse.data.tiny_url })
-
-
     } catch (err) {
       console.error('got error :(', err);
       // signTypedDataV4Result.innerHTML = `Error: ${err.message}`;
