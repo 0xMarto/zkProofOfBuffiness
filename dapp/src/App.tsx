@@ -40,7 +40,7 @@ var QRCode = require('qrcode.react');
 
 
 type MyProps = {};
-type MyState = { 
+type MyState = {
   role: string,
   signed: string,
   proofUrl: string,
@@ -69,7 +69,6 @@ class App extends React.Component<MyProps, MyState> {
   async componentDidMount() {
     if (window.location.pathname.startsWith('/verify')) {
       this.setState({ role: 'doorman' })
-      window.localStorage.setItem('attendees', (Number(window.localStorage.getItem('attendees')) + 1).toString())
       console.log('window.location.pathname', window.location.pathname)
       const proof = window.location.pathname.replace('/verify/', '')
       console.log('proof', proof)
@@ -102,13 +101,17 @@ class App extends React.Component<MyProps, MyState> {
 
     // Mock verification, for now
     // await snarkjs.plonk.verify(json, 1, proof)
-    const ok = this.mockVerifyProof(proof)
-    console.log('ok?', ok, typeof ok)
+    const ok = this.mockVerifyProof(proof);
+    if (ok) {
+      window.localStorage.setItem('attendees', (Number(window.localStorage.getItem('attendees')) + 1).toString());
+    }
+    console.log('ok?', ok, typeof ok);
     this.setState({ verificationOk: ok })
   }
 
   mockVerifyProof(proof: any) {
-    return Math.random() > 0.5
+    return Number(`0x${proof.substring(proof.length-2, proof.length)}`) % 2 === 0;
+    // return Math.random() > 0.5
   }
 
   // async qrHandler(data: string) {
@@ -426,8 +429,8 @@ class App extends React.Component<MyProps, MyState> {
       const response = await fetch("https://api.tinyurl.com/create", {
         body: JSON.stringify({
           // url: "zkbuffi.web.app/verify/" + hexEncode(JSON.stringify(proof).substring(0, 10)),
-          // url: "zkbuffi.web.app/verify/" + solidityCalldataProof,
-          url: "http://18.116.130.17/verify/" + solidityCalldataProof,
+          url: "zkbuffi.web.app/verify/" + solidityCalldataProof,
+          // url: "http://18.116.130.17/verify/" + solidityCalldataProof,
           domain: "tiny.one"
         }),
         headers: {

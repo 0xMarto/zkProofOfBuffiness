@@ -11,6 +11,7 @@ set -eux
 mkdir -p ./dapp/public/zkLibs/
 cp -R ./buffi_js ./dapp/public/zkLibs/
 cp ./buffi.zkey ./dapp/public/
+cp ./buffi_verification_key.json ./dapp/public/
 cp ./dapp/public/zkLibs/buffi_js/buffi.wasm ./dapp/public/buffi.wasm
 #cp ./buffi_inputs.json ./dapp/public/zkLibs/
 #cp ./powersOfTau28_hez_final_12.ptau ./dapp/public/zkLibs/
