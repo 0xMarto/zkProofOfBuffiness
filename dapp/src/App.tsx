@@ -49,7 +49,7 @@ class App extends React.Component<MyProps, MyState> {
             qrData: null
         };
 
-        this.qrHandler = this.qrHandler.bind(this)
+        // this.qrHandler = this.qrHandler.bind(this)
         if (!window.localStorage.attendees)
           window.localStorage.setItem('attendees', '0')
     }
