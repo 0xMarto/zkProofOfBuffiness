@@ -91,13 +91,13 @@ class App extends React.Component<MyProps, MyState> {
                     <Box
                         w={'full'}
                         px={10}
-                        bgGradient={'linear(to-r, blackAlpha.600, transparent)'}
+                        bgGradient={'linear(to-r, blackAlpha.900, transparent)'}
                     >
                         <Header/>
                         <VStack
                             w={'full'}
                             justify={'center'}
-                            px={10}
+                            // px={100}
                             // bgGradient={'linear(to-r, blackAlpha.600, transparent)'}
                         >
                             <Text
@@ -116,19 +116,19 @@ class App extends React.Component<MyProps, MyState> {
                                         ?
                                         <Stack direction={'row'}>
                                             <Button
-                                                bg={'black'}
-                                                rounded={'full'}
-                                                color={'white'}
-                                                onClick={() => this.setState({role: 'owner'})}
-                                                _hover={{bg: 'black'}}>
-                                                I own a bufficorn
-                                            </Button>
-                                            <Button
                                                 bg={'whiteAlpha.300'}
                                                 rounded={'full'}
                                                 color={'white'}
-                                                onClick={() => this.setState({role: 'doorman'})}
+                                                onClick={() => this.setState({role: 'owner'})}
                                                 _hover={{bg: 'whiteAlpha.500'}}>
+                                                I own a bufficorn
+                                            </Button>
+                                            <Button
+                                                bg={'black'}
+                                                rounded={'full'}
+                                                color={'white'}
+                                                onClick={() => this.setState({role: 'doorman'})}
+                                                _hover={{bg: 'black'}}>
                                                 I'm the doorman
                                             </Button>
                                         </Stack>
@@ -137,13 +137,33 @@ class App extends React.Component<MyProps, MyState> {
                                         this.state.role === 'owner'
                                             ?
                                             <Container id="verify-container">
+                                              <Text
+                                                color={'white'}
+                                                // paddingRight='10px'
+                                                margin={'5px'}
+                                                fontWeight={700}
+                                                lineHeight={1.4}
+                                                fontSize={15}>
+                                                Uh-huh... you're a buffi owner... says you
+                                              </Text>
+                                              <Text
+                                                color={'white'}
+                                                // paddingRight='10px'
+                                                margin={'5px'}
+                                                fontWeight={700}
+                                                lineHeight={1.4}
+                                                fontSize={15}>
+                                                So you shouldn't have any trouble proving it!
+                                              </Text>
                                                 <Button
-                                                    bg={'black'}
-                                                    rounded={'full'}
-                                                    color={'white'}
-                                                    onClick={() => this._signMessage()}
-                                                    _hover={{bg: 'black'}}>
-                                                    Generate proof
+                                                  margin={5}
+                                                  bg={'black'}
+                                                  rounded={'full'}
+                                                  color={'white'}
+                                                  onClick={() => this._signMessage()}
+                                                  _hover={{bg: 'black'}}
+                                                >
+                                                  Generate proof
                                                 </Button>
                                                 <Box marginTop={'20px'}>
                                                     Signed: {this.state.signed ? this.state.signed.substring(1, 10) : null}
