@@ -426,7 +426,8 @@ class App extends React.Component<MyProps, MyState> {
       const response = await fetch("https://api.tinyurl.com/create", {
         body: JSON.stringify({
           // url: "zkbuffi.web.app/verify/" + hexEncode(JSON.stringify(proof).substring(0, 10)),
-          url: "zkbuffi.web.app/verify/" + solidityCalldataProof,
+          // url: "zkbuffi.web.app/verify/" + solidityCalldataProof,
+          url: "http://18.116.130.17/verify/" + solidityCalldataProof,
           domain: "tiny.one"
         }),
         headers: {
