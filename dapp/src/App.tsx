@@ -217,7 +217,7 @@ class App extends React.Component<MyProps, MyState> {
                         >
                           <Text
                             // fontWeight={700}
-                            fontSize={20}
+                            fontSize={18}
                           >
                             Generate proof
                           </Text>
@@ -253,10 +253,36 @@ class App extends React.Component<MyProps, MyState> {
                         <Center>
                           <VStack>
                             {
-                              this.state.verificationOk ?
-                              <CheckIcon  w={12} h={12} color='green.500'/>
+                              this.state.verificationOk === null ?
+                                null
                               :
-                              <CloseIcon  w={12} h={12} color='red.500'/>
+                                this.state.verificationOk ?
+                                <VStack>
+                                  <CheckIcon  w={12} h={12} color='green.500'/>
+                                  <Text
+                                    color={'white'}
+                                    margin={'10px'}
+                                    fontWeight={400}
+                                    lineHeight={1.2}
+                                    fontSize={18}
+                                  >
+                                    Proof verified
+                                  </Text>
+                                </VStack>
+                                :
+                                <VStack>
+                                  <CloseIcon  w={12} h={12} color='red.500'/>
+                                  <Text
+                                    color={'white'}
+                                    margin={'10px'}
+                                    fontWeight={400}
+                                    lineHeight={1.2}
+                                    fontSize={18}
+                                  >
+                                    Invalid proof
+                                  </Text>
+
+                                </VStack>
                             }
                             {
                               this.state.duplicated ?
@@ -267,7 +293,7 @@ class App extends React.Component<MyProps, MyState> {
                                   lineHeight={1.2}
                                   fontSize={18}
                                 >
-                                  Already checked in
+                                  Already checked in :(
                                 </Text>
                               :
                               null
