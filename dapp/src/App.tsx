@@ -37,7 +37,7 @@ var QRCode = require('qrcode.react');
 
 
 type MyProps = {};
-type MyState = { role: string, signed: string, proofUrl: string };
+type MyState = { role: string, signed: string, proofUrl: string, qrData: string };
 
 class App extends React.Component<MyProps, MyState> {
     constructor(props: any) {
@@ -45,8 +45,29 @@ class App extends React.Component<MyProps, MyState> {
         this.state = {
             role: null,
             signed: null,
-            proofUrl: null
+            proofUrl: null,
+            qrData: null
         };
+
+        this.qrHandler = this.qrHandler.bind(this)
+    }
+
+    componentDidMount(): void {
+        console.log("window.location")
+        console.log(window.location.pathname)
+        if (window.location.pathname.startsWith('/verify')) {
+          this.setState({ role: 'doorman'})
+        }
+    }
+    async qrHandler(data: string) {
+      console.log('data', data)
+      const response = await fetch(data, {
+        mode: 'no-cors' // 'cors' by default
+      })
+      console.log('response', response)
+      // this.setState({
+      //   qrData: data
+      // })
     }
 
     render() {
@@ -153,6 +174,16 @@ class App extends React.Component<MyProps, MyState> {
                                                 }
                                             </Container>
                                             :
+                                             <Text
+                                                color={'white'}
+                                                paddingRight='140px'
+                                                margin={'50px'}
+                                                fontWeight={700}
+                                                lineHeight={1.2}
+                                                fontSize={21}>
+                                                well hello Mr. Doorman
+                                              </Text>
+            
                                             // <Button
                                             //     bg={'whiteAlpha.300'}
                                             //     rounded={'full'}
@@ -161,7 +192,16 @@ class App extends React.Component<MyProps, MyState> {
                                             //     _hover={{bg: 'whiteAlpha.500'}}>
                                             //     Verify
                                             // </Button>
-                                              <TestQR />
+                                              // <Container>
+                                              //   <TestQR handler={this.qrHandler}/>
+                                              //   {
+                                              //     this.state.qrData ?
+                                              //       <p>qrData: {this.state.qrData}</p>
+                                              //     :
+                                              //       null
+                                              //   }
+                                              // </Container>
+
                                 }
                             </Stack>
                         </VStack>
@@ -469,6 +509,7 @@ const TestQR = (props: any) => {
         onResult={(result, error) => {
           if (!!result) {
             setData(result?.text);
+            props.handler(result?.text)
           }
 
           if (!!error) {
