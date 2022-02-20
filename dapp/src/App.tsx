@@ -1,7 +1,9 @@
 import {
   Box,
   Button,
+  Center,
   ChakraProvider,
+  Checkbox,
   Container,
   Flex,
   Grid,
@@ -31,13 +33,21 @@ import {
 import { toChecksumAddress } from 'ethereumjs-util';
 import { BigNumber } from "ethers";
 import { QrReader } from 'react-qr-reader';
+import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 
 const snarkjs = require("snarkjs");
 var QRCode = require('qrcode.react');
 
 
 type MyProps = {};
-type MyState = { role: string, signed: string, proofUrl: string, qrData: string };
+type MyState = { 
+  role: string,
+  signed: string,
+  proofUrl: string,
+  qrData: string,
+  verificationOk: boolean,
+  duplicated: boolean,
+};
 
 class App extends React.Component<MyProps, MyState> {
   constructor(props: any) {
@@ -46,7 +56,9 @@ class App extends React.Component<MyProps, MyState> {
       role: null,
       signed: null,
       proofUrl: null,
-      qrData: null
+      qrData: null,
+      verificationOk: null,
+      duplicated: null
     };
 
     // this.qrHandler = this.qrHandler.bind(this)
@@ -54,12 +66,51 @@ class App extends React.Component<MyProps, MyState> {
       window.localStorage.setItem('attendees', '0')
   }
 
-  componentDidMount(): void {
+  async componentDidMount() {
     if (window.location.pathname.startsWith('/verify')) {
       this.setState({ role: 'doorman' })
       window.localStorage.setItem('attendees', (Number(window.localStorage.getItem('attendees')) + 1).toString())
+      console.log('window.location.pathname', window.location.pathname)
+      const proof = window.location.pathname.replace('/verify/', '')
+      console.log('proof', proof)
+
+      // Did we check this QR already?
+      const oldProof = window.localStorage.getItem(proof)
+      if (!oldProof) {
+        window.localStorage.setItem(proof, 'true')
+        await this.verifyProof(proof)
+      } else {
+        console.log('Already checked-in :_(')
+        this.setState({ duplicated: true })
+      }
     }
   }
+
+  async verifyProof(proof: any) {
+    console.log(proof)
+
+    const vkey = await fetch('/buffi_verification_key.json', {
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer hy7heS5lDT28kQOCLhO9vmcSqZhrVNF7k1GgjA0p0RPI4Zq7ixEduEJEBhQ3",
+        "Content-Type": "application/json"
+      }
+    })
+    console.log('vkey', vkey)
+    const json = await vkey.json()
+    console.log('json', json)
+
+    // Mock verification, for now
+    // await snarkjs.plonk.verify(json, 1, proof)
+    const ok = this.mockVerifyProof(proof)
+    console.log('ok?', ok, typeof ok)
+    this.setState({ verificationOk: ok })
+  }
+
+  mockVerifyProof(proof: any) {
+    return Math.random() > 0.5
+  }
+
   // async qrHandler(data: string) {
   //   console.log('data', data)
   //   const response = await fetch(data, {
@@ -82,8 +133,8 @@ class App extends React.Component<MyProps, MyState> {
           backgroundImage={
             // TODO serve from public
             // 'url(https://lh3.googleusercontent.com/nSE1ruQ-llGsg-tcl_cujSDQnHi9z-0AdLIJMmMhTZwOhF6WkRR44txmHIofZXmwpSqn0MNTA1LAVjzlU4s6fwUS719onAiPDT-P9g=s0)'
-            'url(buffi.png)'
-            // 'url(public/buffi.png)'
+            // 'url(buffi.png)'
+            'https://zkbuffi.web.app/buffi.png'
           }
           backgroundSize={'cover'}
           backgroundPosition={'center center'}>
@@ -121,7 +172,7 @@ class App extends React.Component<MyProps, MyState> {
                         color={'white'}
                         onClick={() => this.setState({ role: 'owner' })}
                         _hover={{ bg: 'whiteAlpha.500' }}>
-                        I own a bufficorn
+                          I own a bufficorn
                       </Button>
                       <Button
                         bg={'black'}
@@ -143,7 +194,7 @@ class App extends React.Component<MyProps, MyState> {
                           margin={'5px'}
                           fontWeight={700}
                           lineHeight={1.4}
-                          fontSize={18}>
+                          fontSize={'3vh'}>
                           Uh-huh... you're a buffi owner... says you
                         </Text>
                         <Text
@@ -152,10 +203,11 @@ class App extends React.Component<MyProps, MyState> {
                           margin={'5px'}
                           fontWeight={700}
                           lineHeight={1.4}
-                          fontSize={18}>
+                          fontSize={'3vh'}>
                           So you shouldn't have any trouble proving it!
                         </Text>
                         <Button
+                          // height={'11'}
                           margin={5}
                           bg={'black'}
                           rounded={'full'}
@@ -163,12 +215,17 @@ class App extends React.Component<MyProps, MyState> {
                           onClick={() => this._signMessage()}
                           _hover={{ bg: 'black' }}
                         >
-                          Generate proof
+                          <Text
+                            // fontWeight={700}
+                            fontSize={20}
+                          >
+                            Generate proof
+                          </Text>
                         </Button>
 
                         {
                           this.state.proofUrl ?
-                            <Container margin={4}>
+                            <Container margin={5}>
                               <QRCode value={this.state.proofUrl} />
                             </Container>
                             :
@@ -179,7 +236,7 @@ class App extends React.Component<MyProps, MyState> {
                       <Container>
                         <Text
                           color={'white'}
-                          margin={'50px'}
+                          margin={'40px'}
                           fontWeight={700}
                           lineHeight={1.2}
                           fontSize={20}>
@@ -187,33 +244,38 @@ class App extends React.Component<MyProps, MyState> {
                         </Text>
                         <Text
                           color={'white'}
-                          margin={'50px'}
+                          margin={'40px'}
                           fontWeight={700}
                           lineHeight={1.2}
                           fontSize={20}>
                           You have checked in a total of {window.localStorage.getItem('attendees')} attendees
                         </Text>
+                        <Center>
+                          <VStack>
+                            {
+                              this.state.verificationOk ?
+                              <CheckIcon  w={12} h={12} color='green.500'/>
+                              :
+                              <CloseIcon  w={12} h={12} color='red.500'/>
+                            }
+                            {
+                              this.state.duplicated ?
+                                <Text
+                                  color={'white'}
+                                  margin={'10px'}
+                                  fontWeight={400}
+                                  lineHeight={1.2}
+                                  fontSize={18}
+                                >
+                                  Already checked in
+                                </Text>
+                              :
+                              null
+                            }
+                          </VStack>
+                        </Center>
 
                       </Container>
-
-                  // <Button
-                  //     bg={'whiteAlpha.300'}
-                  //     rounded={'full'}
-                  //     color={'white'}
-                  //     onClick={() => this.setState({role: 'doorman'})}
-                  //     _hover={{bg: 'whiteAlpha.500'}}>
-                  //     Verify
-                  // </Button>
-                  // <Container>
-                  //   <TestQR handler={this.qrHandler}/>
-                  //   {
-                  //     this.state.qrData ?
-                  //       <p>qrData: {this.state.qrData}</p>
-                  //     :
-                  //       null
-                  //   }
-                  // </Container>
-
                 }
               </Stack>
             </VStack>
@@ -248,29 +310,12 @@ class App extends React.Component<MyProps, MyState> {
       const msgParams: any = {
         domain: {
           chainId: chainId.toString(),
-          name: 'Ether Mail',
+          name: 'Welcome, anon',
           verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
           version: '1',
         },
         message: {
-          contents: 'Hello, Bob!',
-          from: {
-            name: 'Cow',
-            wallets: [
-              '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826',
-              '0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF',
-            ],
-          },
-          to: [
-            {
-              name: 'Bob',
-              wallets: [
-                '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
-                '0xB0BdaBea57B0BDABeA57b0bdABEA57b0BDabEa57',
-                '0xB0B0b0b0b0b0B000000000000000000000000000',
-              ],
-            },
-          ],
+          contents: 'Sign a message so we can proove this is really your address. Don\'t worry, neither your address nor your buffi holdings will ever be shared with zkbuffi (or anyone else).'
         },
         primaryType: 'Mail',
         types: {
@@ -296,23 +341,18 @@ class App extends React.Component<MyProps, MyState> {
         },
       };
       const signed = await provider.request({
-        method: 'eth_signTypedData_v4',
+        method: 'eth_signTypedData_v3',
         params: [from, JSON.stringify(msgParams)],
       });
       console.log('signed', signed)
 
-      // this.setState({signed: signed})
-      // signTypedDataV4Result.innerHTML = sign;
-      // signTypedDataV4Verify.disabled = false;
-
       // Recover signed msg
-      const recoveredAddr = recoverTypedSignatureV4({
+      const recoveredAddr = recoverTypedSignature({
         data: msgParams,
         sig: signed,
       });
       if (toChecksumAddress(recoveredAddr) === toChecksumAddress(from)) {
         console.log(`Successfully verified signer as ${recoveredAddr}`);
-        // signTypedDataV4VerifyResult.innerHTML = recoveredAddr;
       } else {
         console.log(
           `Failed to verify signer when comparing ${recoveredAddr} to ${from}`,
@@ -336,14 +376,14 @@ class App extends React.Component<MyProps, MyState> {
       const circuit_key = process.env.PUBLIC_URL + 'buffi.zkey'
       console.log(circuit_key)
       // const { proof, buffi_outputs } = await snarkjs.plonk.fullProve(buffiInputs, circuit, circuit_key);
-      const res = await fetch('buffi.wasm')
-      const res2 = await fetch('buffi.zkey')
-      console.log('res', res)
-      console.log('res2', res2)
-      const buffer = await res.arrayBuffer()
-      const buffer2 = await res2.arrayBuffer()
-      console.log('buffer', buffer)
-      console.log('buffer2', buffer2)
+      // const res = await fetch('buffi.wasm')
+      // const res2 = await fetch('buffi.zkey')
+      // console.log('res', res)
+      // console.log('res2', res2)
+      // const buffer = await res.arrayBuffer()
+      // const buffer2 = await res2.arrayBuffer()
+      // console.log('buffer', buffer)
+      // console.log('buffer2', buffer2)
       console.log('I will try to make the proof')
       console.log('inputs are', buffiInputs, circuit, circuit_key)
       console.log('typeof inputs', typeof buffiInputs, typeof circuit, typeof circuit_key)
