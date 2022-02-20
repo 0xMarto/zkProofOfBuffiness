@@ -102,8 +102,14 @@ npm run start
 * https://www.twitch.tv/videos/1300382536
 * And many more...
 
-## Show your support
 
+## Disclosure
+
+The circuit described in this ReadMe is slightly different than the one applied in the app, as we had only 48 hours to build it :).
+
+The circuit used in the app is a simplified version of the one described as the mobile app currently performs a few of the checks that would be performed by the circuit.
+
+However, it should not take us that much longer to implement the full circuit in the future!
 ## Show your support
 
 Give a ⭐️ if you like this project!
