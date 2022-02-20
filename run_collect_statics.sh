@@ -11,3 +11,4 @@ set -eux
 cp -R ./buffi_js ./dapp/public/zkLibs/
 cp ./buffi_inputs.json ./dapp/public/zkLibs/
 cp ./powersOfTau28_hez_final_12.ptau ./dapp/public/zkLibs/
+cp ./buffi.zkey ./dapp/public/
