@@ -143,7 +143,7 @@ class App extends React.Component<MyProps, MyState> {
                           margin={'5px'}
                           fontWeight={700}
                           lineHeight={1.4}
-                          fontSize={15}>
+                          fontSize={18}>
                           Uh-huh... you're a buffi owner... says you
                         </Text>
                         <Text
@@ -152,7 +152,7 @@ class App extends React.Component<MyProps, MyState> {
                           margin={'5px'}
                           fontWeight={700}
                           lineHeight={1.4}
-                          fontSize={15}>
+                          fontSize={18}>
                           So you shouldn't have any trouble proving it!
                         </Text>
                         <Button
@@ -165,45 +165,36 @@ class App extends React.Component<MyProps, MyState> {
                         >
                           Generate proof
                         </Button>
-                        <Box marginTop={'20px'}>
-                          Signed: {this.state.signed ? this.state.signed.substring(1, 10) : null}
-                        </Box>
-
-                        {/* {
-                                                    this.state.signed
-                                                        ?
-                                                        <Container id="proof-container">
-                                                            <Button
-                                                                bg={'black'}
-                                                                rounded={'full'}
-                                                                color={'white'}
-                                                                onClick={() => this._verifyMessage()}
-                                                                _hover={{bg: 'black'}}>
-                                                                recover signer
-                                                            </Button>
-                                                            <QRCode value="https://vitalik.ca/"/>
-                                                        </Container>
-                                                        :
-                                                        null
-                                                } */}
 
                         {
                           this.state.proofUrl ?
-                            <QRCode value={this.state.proofUrl} />
+                            <Container margin={4}>
+                              <QRCode value={this.state.proofUrl} />
+                            </Container>
                             :
                             null
                         }
                       </Container>
                       :
-                      <Text
-                        color={'white'}
-                        paddingRight='140px'
-                        margin={'50px'}
-                        fontWeight={700}
-                        lineHeight={1.2}
-                        fontSize={21}>
-                        well hello Mr. Doorman
-                      </Text>
+                      <Container>
+                        <Text
+                          color={'white'}
+                          margin={'50px'}
+                          fontWeight={700}
+                          lineHeight={1.2}
+                          fontSize={20}>
+                          Well hello, Mr. Doorman
+                        </Text>
+                        <Text
+                          color={'white'}
+                          margin={'50px'}
+                          fontWeight={700}
+                          lineHeight={1.2}
+                          fontSize={20}>
+                          You have checked in a total of {window.localStorage.getItem('attendees')} attendees
+                        </Text>
+
+                      </Container>
 
                   // <Button
                   //     bg={'whiteAlpha.300'}

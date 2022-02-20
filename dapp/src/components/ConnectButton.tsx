@@ -16,7 +16,6 @@ export default function ConnectButton({ handleOpenModal }: Props) {
   }
   
   const [isLargerThan512] = useMediaQuery('(min-width: 512px)')
-  console.log('isLargerThan512', isLargerThan512)
 
   return account ? (
     <Box
