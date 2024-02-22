@@ -1,14 +1,16 @@
-# zkProof Of Buffiness - ETH Denver 2021
+# zkProof Of Buffiness - ETH Denver 2022
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/45073251/154821162-3d4af844-1f74-4fdb-91c3-52e280e55c10.png"/>
 </p>
 
-### Live & deployed contracts
-- [Proof Generator Site!](http://18.116.130.17/)
-- [Proof Verifier Site!](https://zkbuffi.web.app/)
+### Live Demo & deployed contracts
 - [Buffi Proof Verifier Contract (POLYGON)](https://polygonscan.com/address/0xd2071645403cf00d6604337d4c17120cafe2286f)
 - [Live demo video!](https://twitter.com/oiliw3/status/1495337272459218945?t=smOEXTFGCt1NSzK13muGHQ&s=19)
+- [Proof Verifier Site!](https://zkbuffi.web.app/)
+- [Proof Generator Site!](http://18.116.130.17/) (server shut down in 2024)
+
+
 
 ## Vision
 
@@ -59,13 +61,13 @@ The app will also save in a list the already verified proofs to avoid a "double 
 
 ## Authors
 
-👤 **Agustin Zavalla** - https://github.com/azavalla
+👤 **Zava** - https://github.com/azavalla
 
-👤 **Emilio Garcia** - https://github.com/danielemiliogarcia
+👤 **Emi** - https://github.com/danielemiliogarcia
 
-👤 **Jose Baredes** - https://github.com/josebaredes
+👤 **Jose** - https://github.com/josebaredes
 
-👤 **Martin Sanchez** - https://github.com/martinlsanchez
+👤 **Marto** - https://github.com/0xMarto
 
 
 ## Implemented using SnarkJs and Circom circuit compiler.
